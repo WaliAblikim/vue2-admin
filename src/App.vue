@@ -1,12 +1,7 @@
 <template>
-  <div>Hello World</div>
+  <div>
+    <router-view />
+  </div>
 </template>
 
-<script>
-export default {
-  name: "App",
-  components: {},
-};
-</script>
-
-<style lang="scss"></style>
+<style></style>
