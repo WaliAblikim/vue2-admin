@@ -2,25 +2,22 @@
   <t-aside :width="collapsed ? '64px' : '232px'">
     <div class="menu">
       <t-menu :collapsed="collapsed">
-        <t-menu-item
+        <sidebar-item
           v-for="item in menuRoutes"
-          v-bind:key="item.name"
-          :value="item.name"
-        >
-          <template #icon>
-            <t-icon name="app" />
-          </template>
-          仪表盘
-        </t-menu-item>
+          :key="item.name"
+          :item="item"
+        ></sidebar-item>
       </t-menu>
     </div>
   </t-aside>
 </template>
-
+s
 <script>
-import menuRoutes from "@/router/index.js";
+import { menuRoutes } from "@/router";
+import SidebarItem from "@/components/SidebarItem/index.vue";
 
 export default {
+  components: { SidebarItem },
   name: "Sidebar",
   props: {
     collapsed: {

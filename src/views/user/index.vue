@@ -3,6 +3,7 @@
 <script>
 export default {
   name: "UserList",
+  mounted() {},
 };
 </script>
 
