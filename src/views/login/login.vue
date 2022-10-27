@@ -4,10 +4,10 @@
     <t-form
       :data="formData"
       class="form"
-      :rules="rules"
       ref="form"
       :colon="true"
       :labelWidth="0"
+      :rules="rules"
       @submit="handleLogin"
     >
       <t-form-item name="username">
@@ -15,7 +15,10 @@
           v-model="formData.username"
           clearable
           placeholder="请输入用户名"
-          ><template #prefix-icon><icon name="desktop"></icon></template>
+        >
+          <template #prefix-icon>
+            <icon name="desktop"></icon>
+          </template>
         </t-input>
       </t-form-item>
       <t-form-item name="password">
@@ -25,7 +28,9 @@
           clearable
           placeholder="请输入密码"
         >
-          <template #prefix-icon><icon name="lock-on"></icon></template>
+          <template #prefix-icon>
+            <icon name="lock-on"></icon>
+          </template>
         </t-input>
       </t-form-item>
       <t-form-item>
@@ -36,9 +41,9 @@
     </t-form>
   </div>
 </template>
-
 <script>
 import { Icon } from "tdesign-icons-vue";
+
 export default {
   name: "Login",
   components: { Icon },
@@ -48,6 +53,7 @@ export default {
         username: "",
         password: "",
       },
+      loading: false,
       rules: {
         username: [
           { required: true, message: "用户名不能为空" },
@@ -64,7 +70,6 @@ export default {
           },
         ],
       },
-      loading: false,
     };
   },
   methods: {
@@ -73,8 +78,11 @@ export default {
       validateResult === true &&
         this.$store
           .dispatch("login", this.formData)
-          .then(() => {
-            this.$router.replace({ path: this.$route.query.redirect || "/" });
+          .then(async () => {
+            await this.$store.dispatch("user/fetchCurrentUserInfo");
+            await this.$router.push({
+              path: this.$route.query.redirect || "/",
+            });
           })
           .finally(() => {
             this.loading = false;
@@ -91,12 +99,12 @@ export default {
   background-color: #f3f3f3;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   .title {
-    font-size: 30px;
+    font-size: 35px;
+    margin-bottom: 50px;
     font-weight: bold;
-    margin-bottom: 30px;
   }
   .form {
     min-width: 300px;

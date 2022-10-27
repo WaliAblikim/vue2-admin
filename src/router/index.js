@@ -51,8 +51,17 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({
-  routes,
-});
+const createRouter = () => {
+  return new VueRouter({
+    routes,
+  });
+};
+
+export const resetRouter = () => {
+  const newRouter = createRouter();
+  router.macher = newRouter.mather;
+};
+
+const router = createRouter();
 
 export default router;

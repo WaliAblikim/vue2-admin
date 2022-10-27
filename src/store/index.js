@@ -3,6 +3,7 @@ import Vuex, { createLogger } from "vuex";
 import { actions } from "./actions.js";
 import { mutations } from "@/store/mutations.js";
 import { menuRootName } from "@/router/index.js";
+import storage from "@/utils/storage";
 
 Vue.use(Vuex);
 
@@ -40,7 +41,7 @@ const buildPermissionRoutesNameList = (routes) => {
   return nameList;
 };
 
-const state = () => ({ token: "" });
+const state = () => ({ token: storage.get("token") });
 export default new Vuex.Store({
   state,
   actions,
